@@ -1,3 +1,5 @@
+#Can you see this tommy?
+
 import pieces as ps
 import read_pos as rp
 
