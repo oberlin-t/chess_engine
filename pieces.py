@@ -24,7 +24,60 @@ class Pawn(Piece):
         self.passantable = False
 
     def possible_moves(self, board):
-        return 0
+        moves_list = list()
+        if self.is_white == True:
+            if board_variable[self.position[0] + 1][self.position[1]] == 0:
+                moves_list.append(self.position[0] + 1, self.position[1])
+
+                if self.moved == False and board_variable(self.position[0] + 2) == 0:
+                    moves_list.append(self.position[0] + 2, self.position[1])
+            
+            if self.position[1] + 1 <= 7:
+                if board_variable[self.position[0] + 1][self.position[1] + 1] != 0:
+                    if board_variable[self.position[0] + 1][self.position[1] + 1].is_white == False:
+                        moves_list.append(self.position[0] + 1, self.position[1] + 1)
+
+                if board_variable[self.position[0]][[self.position[1] + 1]] != 0:
+                    if board_variable[self.position[0]][[self.position[1] + 1]].name == "P" and board_variable[self.position[0]][self.position[1] + 1].is_white == False:
+                        if board_variable[self.position[0]][[self.position[1] + 1]].passantable == True:
+                            moves_list.append(self.position[0], self.position[1] + 1)
+
+            if self.position[1] - 1 <= 0:
+                if board_variable[self.position[0] + 1][self.position[1] - 1] != 0:
+                    if board_variable[self.position[0] + 1][self.position[1] - 1].is_white == False:
+                        moves_list.append(self.position[0] + 1, self.position[1] - 1)
+
+                if board_variable[self.position[0][self.position[1] - 1]] != 0:
+                    if board_variable[self.position[0]][[self.position[1] - 1]].name == "P" and board_variable[self.position[0] + 1][self.position[1] - 1].is_white == False:
+                        if board_variable[self.position[0]][[self.position[1] - 1]].passantable == True:
+                            moves_list.append(self.position[0], self.position[1] - 1)
+        if self.is_white == False:
+            if board_variable[self.position[0] - 1][self.position[1]] == 0:
+                moves_list.append(self.position[0] + 1, self.position[1])
+
+                if self.moved == False and board_variable(self.position[0] - 2) == 0:
+                    moves_list.append(self.position[0] - 2, self.position[1])
+            
+            if self.position[1] + 1 <= 7:
+                if board_variable[self.position[0] - 1][self.position[1] + 1] != 0:
+                    if board_variable[self.position[0] - 1][self.position[1] + 1].is_white == True:
+                        moves_list.append(self.position[0] - 1, self.position[1] + 1)
+
+                if board_variable[self.position[0]][[self.position[1] + 1]] != 0:
+                    if board_variable[self.position[0]][[self.position[1] + 1]].name == "P" and board_variable[self.position[0]][self.position[1] + 1].is_white == True:
+                        if board_variable[self.position[0]][[self.position[1] + 1]].passantable == True:
+                            moves_list.append(self.position[0], self.position[1] + 1)
+
+            if self.position[1] - 1 <= 0:
+                if board_variable[self.position[0] - 1][self.position[1] - 1] != 0:
+                    if board_variable[self.position[0] - 1][self.position[1] - 1].is_white == True:
+                        moves_list.append(self.position[0] - 1, self.position[1] - 1)
+
+                if board_variable[self.position[0][self.position[1] - 1]] != 0:
+                    if board_variable[self.position[0]][[self.position[1] - 1]].name == "P" and board_variable[self.position[0] + 1][self.position[1] - 1].is_white == True:
+                        if board_variable[self.position[0]][[self.position[1] - 1]].passantable == True:
+                            moves_list.append(self.position[0], self.position[1] - 1)
+        return moves_list
 
 class Rook(Piece):
     def __init__(self, position, is_white):
